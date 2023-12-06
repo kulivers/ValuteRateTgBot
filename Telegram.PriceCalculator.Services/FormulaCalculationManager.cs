@@ -91,13 +91,17 @@ public class FormulaCalculationManager : IFormulaCalculationManager
         await Edit(formula);
     }
 
-    public bool TryCalculateResult(UserFormula formula, out decimal result)
+    public decimal CalculateResult(UserFormula formula)
     {
         formula.Variables = RefreshValuteVariables(formula.Variables);
+        return _calculator.Calculate(formula);
+    }
 
+    public bool TryCalculateResult(UserFormula formula, out decimal result)
+    {
         try
         {
-            result = _calculator.Calculate(formula);
+            result = CalculateResult(formula);
             return true;
         }
         catch

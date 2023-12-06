@@ -1,4 +1,4 @@
-namespace Telegram.PriceCalculator.Calculator.Api;
+namespace Telegram.PriceCalculator.Shared;
 
 public sealed record ValuteCursOnDateDto
 {

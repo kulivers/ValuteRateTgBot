@@ -3,8 +3,9 @@ using CentralBankSDK;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Telegram.PriceCalculator.Calculator.Api;
+using Telegram.PriceCalculator.Shared;
 
-namespace Telegram.PriceCalculator.Calculator;
+namespace Telegram.PriceCalculator.Services;
 
 public class ValuteRateProvider : BackgroundService, IValuteRateProvider//todo remove from api
 {

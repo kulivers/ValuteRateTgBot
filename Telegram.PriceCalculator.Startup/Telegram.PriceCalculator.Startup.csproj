@@ -22,9 +22,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Telegram.PriceCalculator.Calculator\Telegram.PriceCalculator.Calculator.csproj" />
     <ProjectReference Include="..\Telegram.PriceCalculator.Repository\Telegram.PriceCalculator.Repository.csproj" />
     <ProjectReference Include="..\Telegram.PriceCalculator.Router\Telegram.PriceCalculator.Router.csproj" />
+    <ProjectReference Include="..\Telegram.PriceCalculator.Services.Api\Telegram.PriceCalculator.Services.Api.csproj" />
+    <ProjectReference Include="..\Telegram.PriceCalculator.Services\Telegram.PriceCalculator.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Telegram.PriceCalculator.Calculator">
+      <HintPath>bin\Debug\net6.0\Telegram.PriceCalculator.Calculator.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -4,17 +4,17 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Telegram.PriceCalculator.Calculator</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Telegram.PriceCalculator.Calculator.Api\Telegram.PriceCalculator.Calculator.Api.csproj" />
+      <ProjectReference Include="..\Telegram.PriceCalculator.Services.Api\Telegram.PriceCalculator.Services.Api.csproj" />
+      <ProjectReference Include="..\Telegram.PriceCalculator.Shared\Telegram.PriceCalculator.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="CentralBankSDK" Version="1.0.0.3" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
       <PackageReference Include="org.matheval" Version="1.0.0.3" />
     </ItemGroup>
 

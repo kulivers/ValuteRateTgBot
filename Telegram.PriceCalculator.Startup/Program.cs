@@ -1,12 +1,17 @@
 using CentralBankSDK;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using MySql.EntityFrameworkCore.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Examples.Polling;
 using Telegram.Bot.Examples.Polling.Services;
-using Telegram.PriceCalculator.Calculator;
 using Telegram.PriceCalculator.Calculator.Api;
+using Telegram.PriceCalculator.Contracts;
 using Telegram.PriceCalculator.Repository;
 using Telegram.PriceCalculator.Router;
+using Telegram.PriceCalculator.Services;
 using Telegram.PriceCalculator.Shared;
+using ValuteRateProvider = Telegram.PriceCalculator.Calculator.ValuteRateProvider;
 
 var host = Host.CreateDefaultBuilder(args)
                .ConfigureServices((context, services) =>
@@ -36,17 +41,23 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<UserContextStorage>();
                    services.AddScoped<RoutesStorageTree>();
 
-                   //CalculationServices
+                   //Services
                    services.AddScoped<IHardcodedCalculationService, HardCodedService>();
                    services.AddScoped<IFormulaCalculationService, FormulaCalculationService>();
 
                    //repositories
-                   services.AddScoped<RepositoryBase<UserFormula, string>, UserFormulasRepository>();
-
+                   services.AddScoped<IRepositoryManager, RepositoryManager>();
+                   services.AddDbContext<RepositoryContext>(builder =>
+                   {
+                       builder.EnableSensitiveDataLogging();
+                       builder.EnableDetailedErrors();
+                       builder.UseMySQL("Server=127.0.0.1;Uid=ekul;Pwd=ekul;Database=valutebot",
+                           optionsBuilder => optionsBuilder.MigrationsAssembly("Telegram.PriceCalculator.Repository"));
+                   });
 
                    services.AddScoped<ICentralBankService, CentralBankService>();
                    services.AddHostedService<PollingService>();
-                   services.AddHostedService<ValuteRateProvider>();
+                   services.AddHostedService<Telegram.PriceCalculator.Services.ValuteRateProvider>();
                })
                .Build();
 

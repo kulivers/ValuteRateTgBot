@@ -1,7 +1,7 @@
 using org.matheval;
 using Telegram.PriceCalculator.Calculator.Api;
 
-namespace Telegram.PriceCalculator.Calculator;
+namespace Telegram.PriceCalculator.Services;
 
 public class FormulaCalculationService : IFormulaCalculationService
 {

@@ -7,13 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MySql.Data" Version="8.2.0" />
-      <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.21" />
-      <PackageReference Include="mysqlconnector" Version="2.3.1" />
+      <Reference Include="Telegram.PriceCalculator.Calculator.Api">
+        <HintPath>..\Telegram.PriceCalculator.Startup\bin\Debug\net6.0\Telegram.PriceCalculator.Calculator.Api.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Telegram.PriceCalculator.Contracts\Telegram.PriceCalculator.Contracts.csproj" />
       <ProjectReference Include="..\Telegram.PriceCalculator.Shared\Telegram.PriceCalculator.Shared.csproj" />
     </ItemGroup>
 

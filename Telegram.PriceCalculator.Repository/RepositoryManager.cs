@@ -1,3 +1,5 @@
+using Telegram.PriceCalculator.Contracts;
+
 namespace Telegram.PriceCalculator.Repository;
 
 public sealed class RepositoryManager : IRepositoryManager

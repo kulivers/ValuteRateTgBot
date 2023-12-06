@@ -1,7 +1,8 @@
 using CentralBankSDK.Model.CursOnDateResponse;
 using Telegram.PriceCalculator.Calculator.Api;
+using Telegram.PriceCalculator.Shared;
 
-namespace Telegram.PriceCalculator.Calculator;
+namespace Telegram.PriceCalculator.Services;
 
 internal class Mapper
 {

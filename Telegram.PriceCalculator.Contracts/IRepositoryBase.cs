@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Telegram.PriceCalculator.Repository;
+namespace Telegram.PriceCalculator.Contracts;
 
 public interface IRepositoryBase<T>
 {

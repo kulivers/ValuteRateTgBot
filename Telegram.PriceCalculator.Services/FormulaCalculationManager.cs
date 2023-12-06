@@ -1,4 +1,4 @@
-namespace Telegram.PriceCalculator.Calculator;
+namespace Telegram.PriceCalculator.Services;
 
 public class FormulaCalculationManager
 {

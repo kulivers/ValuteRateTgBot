@@ -1,3 +1,4 @@
+using Telegram.PriceCalculator.Contracts;
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Repository;

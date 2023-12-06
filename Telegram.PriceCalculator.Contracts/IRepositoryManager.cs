@@ -1,4 +1,4 @@
-namespace Telegram.PriceCalculator.Repository;
+namespace Telegram.PriceCalculator.Contracts;
 
 public interface IRepositoryManager
 {

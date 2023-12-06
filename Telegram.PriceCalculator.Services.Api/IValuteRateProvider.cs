@@ -6,6 +6,6 @@ public interface IValuteRateProvider
 {
     Task UpdateRate();
     void SetInterval(TimeSpan interval);
-    ValuteCursOnDateDto GetCurrentRate(string vchCode);
-    ConcurrentDictionary<string, ValuteCursOnDateDto> GetCurrentRate();
+    Telegram.PriceCalculator.Shared.ValuteCursOnDateDto GetCurrentRate(string vchCode);
+    ConcurrentDictionary<string, Telegram.PriceCalculator.Shared.ValuteCursOnDateDto> GetCurrentRate();
 }

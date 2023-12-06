@@ -1,6 +1,6 @@
 ﻿using Telegram.PriceCalculator.Calculator.Api;
 
-namespace Telegram.PriceCalculator.Calculator;
+namespace Telegram.PriceCalculator.Services;
 
 public class HardCodedService : IHardcodedCalculationService
 {

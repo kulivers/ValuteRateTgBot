@@ -41,7 +41,7 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<IFormulaCalculationService, FormulaCalculationService>();
 
                    //repositories
-                   services.AddScoped<RepositoryBase<UserFormulaDto, string>, UserFormulasRepository>();
+                   services.AddScoped<RepositoryBase<UserFormula, string>, UserFormulasRepository>();
 
 
                    services.AddScoped<ICentralBankService, CentralBankService>();

@@ -1,36 +1,37 @@
-﻿namespace Telegram.PriceCalculator.Shared;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public record UserFormulaDto
+namespace Telegram.PriceCalculator.Shared;
+
+public class UserFormula
 {
-    public UserFormulaDto()
+    public UserFormula()
     {
 
     }
 
-    public UserFormulaDto(long userId, string formulaId, string formula, List<Variable> variables)
+    public UserFormula(long formulaId, long userId, string formula, List<Variable> variables)
     {
         UserId = userId;
         FormulaId = formulaId;
         Formula = formula;
         Variables = variables;
     }
+    public UserFormula(long formulaId, long userId, string formula)
+    {
+        UserId = userId;
+        FormulaId = formulaId;
+        Formula = formula;
+    }
 
+    [Required]
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long FormulaId { get; set; }
+    [Required]
     public long UserId { get; set; }
-    public string FormulaId { get; set; }
+    [Required]
     public string Formula { get; set; }
-
-    public List<Variable> Variables { get; set; }
+    public List<Variable>? Variables { get; set; }
 }
 
-public record ValuteCalculatedVariable : Variable
-{
-    public string VchCode { get; set; }
-    public DateTime LastUpdateTime { get; set; }
-}
-
-public record Variable
-{
-    public long Id { get; set; }
-    public string Name { get; set; }
-    public decimal Value { get; set; }
-}

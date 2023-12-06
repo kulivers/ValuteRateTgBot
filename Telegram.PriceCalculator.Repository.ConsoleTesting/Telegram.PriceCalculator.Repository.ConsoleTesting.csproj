@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Telegram.PriceCalculator.Repository\Telegram.PriceCalculator.Repository.csproj" />
+      <ProjectReference Include="..\Telegram.PriceCalculator.Services\Telegram.PriceCalculator.Services.csproj" />
     </ItemGroup>
 
 </Project>

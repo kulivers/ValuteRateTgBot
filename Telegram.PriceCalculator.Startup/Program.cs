@@ -38,9 +38,6 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<UserContextStorage>();
                    services.AddScoped<RoutesStorageTree>();
 
-                   //Services
-                   services.AddScoped<IHardcodedCalculationService, HardCodedService>();
-                   services.AddScoped<IFormulaCalculationService, FormulaCalculationService>();
 
                    //repositories
                    services.AddScoped<IRepositoryManager, RepositoryManager>();

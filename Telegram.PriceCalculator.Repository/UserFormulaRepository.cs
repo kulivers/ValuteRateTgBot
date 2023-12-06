@@ -12,4 +12,33 @@ public class UserFormulaRepository : RepositoryBase<UserFormula>, IUserFormulaRe
     {
         _repositoryContext = repositoryContext;
     }
+
+    public UserFormula Edit(UserFormula formula)
+    {
+        base.Update(formula);
+        return formula;
+    }
+
+    public UserFormula Delete(UserFormula formula)
+    {
+        base.Delete(formula);
+        return formula;
+    }
+
+    public async Task<UserFormula> CreateAsync(UserFormula formula)
+    {
+        await base.CreateAsync(formula);
+        return formula;
+    }
+
+    public UserFormula? Get(long id)
+    {
+        return base.FindByCondition(formula => formula.FormulaId == id).SingleOrDefault();
+    }
+
+    public UserFormula Create(UserFormula formula)
+    {
+        base.Create(formula);
+        return formula;
+    }
 }

@@ -16,4 +16,5 @@ public sealed class RepositoryManager : IRepositoryManager
     public IUserFormulaRepository Formulas => _userFormulasRepository.Value;
 
     public void Save() => _repositoryContext.SaveChanges();
+    public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
 }

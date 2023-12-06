@@ -9,6 +9,7 @@
     <ItemGroup>
       <Folder Include="Controllers\" />
       <Folder Include="Views\Formula\" />
+      <Folder Include="Views\Valute\" />
     </ItemGroup>
 
 </Project>

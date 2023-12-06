@@ -27,7 +27,7 @@ public class RoutesStorageTree
         Routes.Default
     };
 
-    public HashSet<string> GetRoutes() => new(_rootRoutes);
+    public HashSet<string> AllRoutes => new(_rootRoutes);
 
     public bool Contains(string route)
     {

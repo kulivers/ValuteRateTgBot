@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Microsoft.EntityFrameworkCore;
 using Telegram.PriceCalculator.Repository;
 using Telegram.PriceCalculator.Shared;
 

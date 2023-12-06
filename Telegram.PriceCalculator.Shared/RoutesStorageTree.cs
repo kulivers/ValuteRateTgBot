@@ -1,4 +1,4 @@
-namespace Telegram.PriceCalculator.Router;
+namespace Telegram.PriceCalculator.Shared;
 
 public class RoutesStorageTree
 {

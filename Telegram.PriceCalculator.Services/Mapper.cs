@@ -1,5 +1,4 @@
 using CentralBankSDK.Model.CursOnDateResponse;
-using Telegram.PriceCalculator.Calculator.Api;
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Services;

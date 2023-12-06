@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Telegram.PriceCalculator.Router.Api\Telegram.PriceCalculator.Router.Api.csproj" />
+      <ProjectReference Include="..\Telegram.PriceCalculator.Shared\Telegram.PriceCalculator.Shared.csproj" />
     </ItemGroup>
 
 </Project>

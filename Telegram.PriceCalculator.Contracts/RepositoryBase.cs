@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
 using Telegram.PriceCalculator.Repository;
 
 namespace Telegram.PriceCalculator.Contracts;

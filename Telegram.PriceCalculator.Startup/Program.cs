@@ -1,7 +1,5 @@
 using CentralBankSDK;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using MySql.EntityFrameworkCore.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Examples.Polling;
 using Telegram.Bot.Examples.Polling.Services;
@@ -11,7 +9,6 @@ using Telegram.PriceCalculator.Repository;
 using Telegram.PriceCalculator.Router;
 using Telegram.PriceCalculator.Services;
 using Telegram.PriceCalculator.Shared;
-using ValuteRateProvider = Telegram.PriceCalculator.Calculator.ValuteRateProvider;
 
 var host = Host.CreateDefaultBuilder(args)
                .ConfigureServices((context, services) =>
@@ -57,7 +54,7 @@ var host = Host.CreateDefaultBuilder(args)
 
                    services.AddScoped<ICentralBankService, CentralBankService>();
                    services.AddHostedService<PollingService>();
-                   services.AddHostedService<Telegram.PriceCalculator.Services.ValuteRateProvider>();
+                   services.AddHostedService<ValuteRateProvider>();
                })
                .Build();
 

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Telegram.Bot;
-using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.ReplyMarkups;
+using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router;
 

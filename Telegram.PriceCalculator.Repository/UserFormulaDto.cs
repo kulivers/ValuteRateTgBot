@@ -1,0 +1,2 @@
+namespace Telegram.PriceCalculator.Repository;
+

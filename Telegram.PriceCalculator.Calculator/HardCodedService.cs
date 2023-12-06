@@ -2,7 +2,7 @@
 
 namespace Telegram.PriceCalculator.Calculator;
 
-public class HardCodedService : ICalculationService
+public class HardCodedService : IHardcodedCalculationService
 {
     private readonly ValuteRateProvider _valuteRateProvider;
 

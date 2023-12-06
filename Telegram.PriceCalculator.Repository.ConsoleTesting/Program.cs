@@ -13,7 +13,7 @@ internal class Program
             cs1 = "Server=127.0.0.1;Uid=ekul;Pwd=ekul;";
             var testRepo = new TestRepo(cs1);
             testRepo.TestConnection().Wait();
-            var result = testRepo.ExecuteStringAsync("SHOW DATABASES");
+            var result = testRepo.ReadStringAsync("SHOW DATABASES");
             var enumerator = result.GetAsyncEnumerator();
             while (await enumerator.MoveNextAsync())
             {

@@ -6,7 +6,7 @@ using Telegram.PriceCalculator.Calculator.Api;
 
 namespace Telegram.PriceCalculator.Calculator;
 
-public class ValuteRateProvider : BackgroundService, IValuteRateProvider
+public class ValuteRateProvider : BackgroundService, IValuteRateProvider//todo remove from api
 {
     private readonly ILogger<ValuteRateProvider> _logger;
 

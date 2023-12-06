@@ -13,17 +13,32 @@ public class MessageRouter
     private readonly ILogger<MessageRouter> _logger;
     private readonly ITelegramBotClient _botClient;
     private UserContextStorage _userContextStorage;
+    private RoutesStorageTree _routes;
 
-    public MessageRouter(ILogger<MessageRouter> logger, ITelegramBotClient botClient, UserContextStorage userContextStorage)
+    public MessageRouter(ILogger<MessageRouter> logger, ITelegramBotClient botClient, UserContextStorage userContextStorage, RoutesStorageTree routes)
     {
         _logger = logger;
         _botClient = botClient;
         _userContextStorage = userContextStorage;
+        _routes = routes;
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
         Task handler;
+        var userId = update?.Message?.From?.Id;
+        if (userId == null)
+        {
+            return;
+        }
+
+        var userContext = _userContextStorage.Get((long)userId);
+        switch (userContext)
+        {
+            case Routes.Default:
+                break;
+        }
+
         switch (update)
         {
             // UpdateType.Unknown:

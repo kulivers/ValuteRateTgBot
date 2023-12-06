@@ -10,4 +10,8 @@
       <PackageReference Include="mysqlconnector" Version="2.3.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Telegram.PriceCalculator.Shared\Telegram.PriceCalculator.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

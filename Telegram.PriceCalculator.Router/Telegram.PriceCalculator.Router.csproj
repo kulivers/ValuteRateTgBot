@@ -11,4 +11,8 @@
       <PackageReference Include="Telegram.Bot" Version="19.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Telegram.PriceCalculator.Router.Api\Telegram.PriceCalculator.Router.Api.csproj" />
+    </ItemGroup>
+
 </Project>

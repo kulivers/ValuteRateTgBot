@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Telegram.PriceCalculator.Calculator\Telegram.PriceCalculator.Calculator.csproj" />
+    <ProjectReference Include="..\Telegram.PriceCalculator.Repository\Telegram.PriceCalculator.Repository.csproj" />
     <ProjectReference Include="..\Telegram.PriceCalculator.Router\Telegram.PriceCalculator.Router.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,10 @@
 namespace Telegram.PriceCalculator.Presentation.Views.Valute;
 
-public class ValuteMenu
+public class ValuteRepliesFactory
 {
-    
+    public ValuteRepliesFactory()
+    {
+
+    }
+
 }

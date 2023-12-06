@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.PriceCalculator.Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.PriceCalculator.Repository.ConsoleTesting", "Telegram.PriceCalculator.Repository.ConsoleTesting\Telegram.PriceCalculator.Repository.ConsoleTesting.csproj", "{C7E53257-1284-46C9-8D24-F7E68BAA5316}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.PriceCalculator.Router.Api", "Telegram.PriceCalculator.Router.Api\Telegram.PriceCalculator.Router.Api.csproj", "{31E835B0-CB63-4370-B0B2-B944C19E0230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.PriceCalculator.Shared", "Telegram.PriceCalculator.Shared\Telegram.PriceCalculator.Shared.csproj", "{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +163,38 @@ Global
 		{C7E53257-1284-46C9-8D24-F7E68BAA5316}.Release|x64.Build.0 = Release|Any CPU
 		{C7E53257-1284-46C9-8D24-F7E68BAA5316}.Release|x86.ActiveCfg = Release|Any CPU
 		{C7E53257-1284-46C9-8D24-F7E68BAA5316}.Release|x86.Build.0 = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|ARM.Build.0 = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|x64.Build.0 = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Debug|x86.Build.0 = Debug|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|ARM.ActiveCfg = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|ARM.Build.0 = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|x64.ActiveCfg = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|x64.Build.0 = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|x86.ActiveCfg = Release|Any CPU
+		{31E835B0-CB63-4370-B0B2-B944C19E0230}.Release|x86.Build.0 = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|x64.Build.0 = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Debug|x86.Build.0 = Debug|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|ARM.Build.0 = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|x64.ActiveCfg = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|x64.Build.0 = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|x86.ActiveCfg = Release|Any CPU
+		{4EA6E0CC-918A-4B0A-AE87-C2A158CB56D3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

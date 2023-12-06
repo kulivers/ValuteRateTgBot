@@ -4,6 +4,9 @@ using Telegram.Bot.Examples.Polling;
 using Telegram.Bot.Examples.Polling.Services;
 using Telegram.PriceCalculator.Calculator;
 using Telegram.PriceCalculator.Calculator.Api;
+using Telegram.PriceCalculator.Repository;
+using Telegram.PriceCalculator.Router;
+using Telegram.PriceCalculator.Shared;
 
 var host = Host.CreateDefaultBuilder(args)
                .ConfigureServices((context, services) =>
@@ -25,9 +28,22 @@ var host = Host.CreateDefaultBuilder(args)
                                return new TelegramBotClient(options, httpClient);
                            });
 
-                   services.AddScoped<ICalculationService, HardCodedService>();
                    services.AddScoped<UpdateHandler>();
                    services.AddScoped<ReceiverService>();
+
+                   //ROUTER
+                   services.AddScoped<MessageRouter>();
+                   services.AddScoped<UserContextStorage>();
+                   services.AddScoped<RoutesStorageTree>();
+
+                   //CalculationServices
+                   services.AddScoped<IHardcodedCalculationService, HardCodedService>();
+                   services.AddScoped<IFormulaCalculationService, FormulaCalculationService>();
+
+                   //repositories
+                   services.AddScoped<RepositoryBase<UserFormulaDto, string>, UserFormulasRepository>();
+
+
                    services.AddScoped<ICentralBankService, CentralBankService>();
                    services.AddHostedService<PollingService>();
                    services.AddHostedService<ValuteRateProvider>();

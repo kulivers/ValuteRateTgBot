@@ -38,7 +38,7 @@ public abstract class RepositoryBase
         }
     }
 
-    public async IAsyncEnumerable<string> ExecuteStringAsync(string toExec)
+    public async IAsyncEnumerable<string> ReadStringAsync(string toExec)
     {
         await using var connection = new MySqlConnection(_connectionString);
         await connection.OpenAsync();
@@ -67,23 +67,23 @@ public abstract class RepositoryBase
         command.ExecuteNonQuery();
     }
 
-    public async Task Run(string toExec)
+    public async Task ExecuteAsync(string toExec)
     {
         await using var connection = new MySqlConnection(_connectionString);
         await connection.OpenAsync();
 
         await using var command = new MySqlCommand(toExec, connection);
-        await using var reader = await command.ExecuteReaderAsync();
+        await command.ExecuteNonQueryAsync();
     }
 }
 
-public abstract class RepositoryBase<T> : RepositoryBase
+public abstract class RepositoryBase<T, IdT> : RepositoryBase
 {
     public abstract Task Initialize();
-    public abstract Task<T> Create<T>();
-    public abstract Task<T> Edit<T>();
-    public abstract Task<T> Delete<T>();
-    public abstract Task<T> Find<T>();
+    public abstract Task<T> Get(IdT entity);
+    public abstract Task<T> Create(T entity);
+    public abstract Task Edit(T entity);
+    public abstract Task Delete(IdT entity);
 
     protected RepositoryBase(string connectionString) : base(connectionString)
     {

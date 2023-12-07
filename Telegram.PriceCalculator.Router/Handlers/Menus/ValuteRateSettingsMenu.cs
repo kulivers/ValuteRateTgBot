@@ -1,24 +1,25 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.PriceCalculator.Presentation;
+using Telegram.PriceCalculator.Router.Menu;
 using Telegram.PriceCalculator.Shared;
 
-namespace Telegram.PriceCalculator.Router.Menu;
+namespace Telegram.PriceCalculator.Router.Handlers.Menus;
 
-public class FormulaSettingsSettingsMenu : ActionHandler
+public class ValuteRateSettingsMenu : ActionHandler
 {
-    public static string ActionName => ActionNames.Menu.FormulaSettings;
+    public override string ActionName => ActionNames.Menu.ValuteRateSettings;
     public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update)
     {
         var actions = new List<string>()
         {
-            ActionNames.FormulaSettings.SetupNewFormula,
-            ActionNames.FormulaSettings.GetFormula,
-            ActionNames.FormulaSettings.ListFormulas,
-            ActionNames.FormulaSettings.EditFormula,
+            ActionNames.ValuteRateSettings.UpdateRates,
+            ActionNames.ValuteRateSettings.GetByCountry,
+            ActionNames.ValuteRateSettings.GetByVch,
+            ActionNames.ValuteRateSettings.GetAllVch,
         }.Select(i=>new KeyValuePair<string, string>(i, i));
 
-        userContext.Set(update.Message.From.Id, Routes.Formula.Root);
+        userContext.Set(update.Message.From.Id, Routes.Valute.Root);
         await botClient.SendTextMessageAsync(
             chatId: update.Message.Chat.Id,
             text: "Choose action",

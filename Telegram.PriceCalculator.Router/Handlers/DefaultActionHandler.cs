@@ -7,7 +7,7 @@ namespace Telegram.PriceCalculator.Router.Menu;
 
 public class DefaultActionHandler : ActionHandler
 {
-    public static string ActionName => ActionNames.Default;
+    public override string ActionName => ActionNames.Default;
     public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update)
     {
         var userMessage = update?.Message?.Text;

@@ -7,6 +7,9 @@ using Telegram.PriceCalculator.Calculator.Api;
 using Telegram.PriceCalculator.Contracts;
 using Telegram.PriceCalculator.Repository;
 using Telegram.PriceCalculator.Router;
+using Telegram.PriceCalculator.Router.Handlers.Menus;
+using Telegram.PriceCalculator.Router.Menu;
+using Telegram.PriceCalculator.Router.Menu.Valute;
 using Telegram.PriceCalculator.Services;
 using Telegram.PriceCalculator.Shared;
 
@@ -38,6 +41,11 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<UserContext>();
                    services.AddScoped<RoutesStorageTree>();
 
+                   //actionHandlers
+                   services.AddScoped<ActionHandler, DefaultActionHandler>();
+                   services.AddScoped<ActionHandler, ValuteRateSettingsMenu>();
+                   services.AddScoped<ActionHandler, FormulaSettingsSettingsMenu>();
+                   services.AddScoped<ActionHandler, UpdateRatesHandler>();
 
                    //repositories
                    services.AddScoped<IRepositoryManager, RepositoryManager>();
@@ -51,7 +59,7 @@ var host = Host.CreateDefaultBuilder(args)
 
                    services.AddScoped<ICentralBankService, CentralBankService>();
                    services.AddHostedService<PollingService>();
-                   services.AddHostedService<ValuteRateProvider>();
+                   services.AddHostedApiService<IValuteRateProvider, ValuteRateProvider>();
                })
                .Build();
 

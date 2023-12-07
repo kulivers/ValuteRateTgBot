@@ -2,20 +2,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Telegram.PriceCalculator.Presentation;
 
-public class BaseComponent
-{
-    ReplyKeyboardMarkup replyKeyboardMarkup = new(
-        new[]
-        {
-            new KeyboardButton[] { "1.1", "1.2" },
-            new KeyboardButton[] { "2.1", "2.2" },
-        })
-    {
-        ResizeKeyboard = true
-    };
-}
-
-public static class TgViewsFactory
+public static class TgViewsFactory //todo not static
 {
     public static IReplyMarkup GetKeyboard(params string[] actions) =>
         new ReplyKeyboardMarkup(

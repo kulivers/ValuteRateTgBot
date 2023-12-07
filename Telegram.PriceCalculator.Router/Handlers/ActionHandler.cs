@@ -6,6 +6,6 @@ namespace Telegram.PriceCalculator.Router.Menu;
 
 public abstract class ActionHandler
 {
-    public static string ActionName { get; }
-    public abstract Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update);
+    public abstract string ActionName { get; } //todo remake to abstract
+    public abstract Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update); //todo cts
 }

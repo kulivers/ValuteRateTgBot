@@ -4,9 +4,9 @@ namespace Telegram.PriceCalculator.Services;
 
 public class HardCodedService// : IHardcodedCalculationService todo delete
 {
-    private readonly ValuteRateProvider _valuteRateProvider;
+    private readonly IValuteRateProvider _valuteRateProvider;
 
-    public HardCodedService(ValuteRateProvider provider)
+    public HardCodedService(IValuteRateProvider provider)
     {
         _valuteRateProvider = provider;
     }

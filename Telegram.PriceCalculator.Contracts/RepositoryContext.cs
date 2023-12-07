@@ -45,6 +45,7 @@ public class RepositoryContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
             entity.Property(e => e.Value).IsRequired();
+
         });
 
         builder.Entity<ValuteCalculatedVariable>(entity =>

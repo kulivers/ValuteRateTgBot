@@ -20,6 +20,11 @@ public class FormulaCalculationManager : IFormulaCalculationManager
 
     public async Task Create(UserFormula formula)
     {
+        if (_repository.Formulas.GetByUserId(formula.UserId) != null)
+        {
+            throw new InvalidOperationException();
+        }
+
         await _repository.Formulas.CreateAsync(formula);
         await _repository.SaveAsync();
     }
@@ -32,6 +37,12 @@ public class FormulaCalculationManager : IFormulaCalculationManager
 
     public async Task Delete(UserFormula formula)
     {
+        if (formula.Variables!=null)
+        {
+            _repository.Variables.DeleteRange(formula.Variables);
+        }
+        await _repository.SaveAsync();
+
         _repository.Formulas.Delete(formula);
         await _repository.SaveAsync();
     }
@@ -42,7 +53,8 @@ public class FormulaCalculationManager : IFormulaCalculationManager
     }
     public UserFormula? GetByUserId(long id)
     {
-        return _repository.Formulas.GetByUserId(id);
+        var formulaId = _repository.Formulas.GetByUserId(id);//todo fix
+        return formulaId;
     }
 
     public TestFormulaResult TestFormula(long id)
@@ -97,7 +109,7 @@ public class FormulaCalculationManager : IFormulaCalculationManager
 
     public async Task Create(string message, long userId)
     {
-        var rows = message.Split('n');
+        var rows = message.Split('\n');
         var formula = rows[0];
         var variablesRows = rows.Skip(1).ToArray();
         var variables = new List<Variable>();

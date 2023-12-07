@@ -3,6 +3,26 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Repository;
 
+public class VariablesRepository : RepositoryBase<Variable>, IVariablesRepository
+{
+    public VariablesRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+    {
+    }
+
+    public void Delete(Variable variable)
+    {
+        base.Delete(variable);
+    }
+
+    public void DeleteRange(IEnumerable<Variable> variables)
+    {
+        foreach (var variable in variables)
+        {
+            base.Delete(variable);
+        }
+    }
+}
+
 public class UserFormulaRepository : RepositoryBase<UserFormula>, IUserFormulaRepository
 {
     private readonly RepositoryContext _repositoryContext;

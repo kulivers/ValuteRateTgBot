@@ -4,6 +4,7 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Formula;
 
+
 public class SetupNewFormulaHandler : IActionHandler
 {
     public string ActionName => ActionNames.FormulaSettings.SetupNewFormulaInfo;

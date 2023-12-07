@@ -14,9 +14,7 @@ public class FormulaSettingsSettingsMenu : IActionHandler
         var actions = new List<string>()
         {
             ActionNames.FormulaSettings.SetupNewFormulaInfo,
-            ActionNames.FormulaSettings.GetFormula,
-            ActionNames.FormulaSettings.ListFormulas,
-            ActionNames.FormulaSettings.EditFormula,
+            ActionNames.FormulaSettings.DeleteFormula,
         }.Select(i=>new KeyValuePair<string, string>(i, i));
 
         userContext.Set(userId, Routes.Formula.Root);//todo everywhere is ctx

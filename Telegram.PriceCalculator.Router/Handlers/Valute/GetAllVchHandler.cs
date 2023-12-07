@@ -22,7 +22,7 @@ public class GetAllVchHandler : IActionHandler
         userContext.Set(userId, Routes.Valute.GetAllRates);
         var rates = _rateProvider.GetCurrentRate();
         var builder = new StringBuilder();
-        builder.Append("[VCH] - [Valute name] - [Current rate]\n");
+        builder.Append("[VCH] - [Valute name]\n");
         foreach (var (vch, curseValue) in rates)
         {
             var row = $"{vch} {curseValue.Vname}\n";

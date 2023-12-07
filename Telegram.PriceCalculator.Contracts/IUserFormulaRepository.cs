@@ -1,7 +1,11 @@
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Contracts;
-
+public interface IVariablesRepository
+{
+    void Delete(Variable variable);
+    void DeleteRange(IEnumerable<Variable> variable);
+}
 public interface IUserFormulaRepository
 {
     Task<UserFormula> CreateAsync(UserFormula formula);

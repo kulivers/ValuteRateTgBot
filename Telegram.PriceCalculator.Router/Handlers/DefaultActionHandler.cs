@@ -15,7 +15,9 @@ public class DefaultActionHandler : IActionHandler
     {
         _calcManager = calculationManager;
     }
+
     public string ActionName => ActionNames.Default;
+
     public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         if (string.IsNullOrWhiteSpace(message))
@@ -27,7 +29,7 @@ public class DefaultActionHandler : IActionHandler
         if (decimal.TryParse(message, out var result))
         {
             var formula = _calcManager.GetByUserId(userId);
-            if (formula==null)
+            if (formula == null)
             {
                 await botClient.SendTextMessageAsync(
                     chatId: chatId,
@@ -36,7 +38,12 @@ public class DefaultActionHandler : IActionHandler
                 return;
             }
 
-            formula.Variables?.Add(new Variable(){Name = "USER", Value = result});
+            if (formula.Variables == null)
+            {
+                formula.Variables = new List<Variable>();
+                formula.Variables.Add(new Variable() { Name = "USER", Value = result });
+            }
+
             if (_calcManager.TryCalculateResult(formula, out result))
             {
                 await botClient.SendTextMessageAsync(
@@ -51,6 +58,7 @@ public class DefaultActionHandler : IActionHandler
                     text: "cant calculate result",
                     cancellationToken: token);
             }
+
             //calculate for user formula //todo here is actions by context
             return;
         }
@@ -66,5 +74,4 @@ public class DefaultActionHandler : IActionHandler
             replyMarkup: TgViewsFactory.GetKeyboard(ActionNames.Menu.ValuteRateSettings, ActionNames.Menu.FormulaSettings),
             cancellationToken: cancellationToken);
     }
-
 }

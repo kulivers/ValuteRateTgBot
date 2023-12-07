@@ -14,9 +14,9 @@ public class RoutesStorageTree
 
         Routes.Formula.Root,
         Routes.Formula.FormulaList,
-        Routes.Formula.FormulaList,
-        Routes.Formula.FormulaList,
-        Routes.Formula.FormulaList,
+        Routes.Formula.Formulacreate,
+        Routes.Formula.Formulaedit,
+        Routes.Formula.Formuladelete,
 
         Routes.Formula.Vars.Root,
         Routes.Formula.Vars.List,
@@ -24,6 +24,7 @@ public class RoutesStorageTree
         Routes.Formula.Vars.Edit,
         Routes.Formula.Vars.Delete,
 
+        Routes.Menu,
         Routes.Default
     };
 

@@ -3,12 +3,12 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router;
 
-public class UserContextStorage
+public class UserContext
 {
     private readonly ConcurrentDictionary<long, string> _currentUsersRoutesContext;
     private readonly RoutesStorageTree _routesStorageTree;
 
-    public UserContextStorage(RoutesStorageTree tree)
+    public UserContext(RoutesStorageTree tree)
     {
         _currentUsersRoutesContext = new ConcurrentDictionary<long, string>();
         _routesStorageTree = tree;

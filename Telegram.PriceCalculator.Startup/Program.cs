@@ -35,7 +35,7 @@ var host = Host.CreateDefaultBuilder(args)
 
                    //ROUTER
                    services.AddScoped<MessageRouter>();
-                   services.AddScoped<UserContextStorage>();
+                   services.AddScoped<UserContext>();
                    services.AddScoped<RoutesStorageTree>();
 
 

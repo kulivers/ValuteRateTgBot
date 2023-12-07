@@ -12,7 +12,7 @@ public class ValuteRateProvider : BackgroundService, IValuteRateProvider //todo 
     private readonly ILogger<ValuteRateProvider> _logger;
 
     private TimeSpan _interval;
-    private readonly ConcurrentDictionary<string, ValuteCursOnDateDto> _currentRate;
+    private readonly ConcurrentDictionary<string, ValuteCursOnDateDto?> _currentRate;
     private readonly TimeSpan _defaultInterval = TimeSpan.FromHours(2);
 
     private readonly ICentralBankService _centralBankService;
@@ -22,7 +22,7 @@ public class ValuteRateProvider : BackgroundService, IValuteRateProvider //todo 
         _logger = logger;
         _interval = _defaultInterval;
         _centralBankService = centralBankService;
-        _currentRate = new ConcurrentDictionary<string, ValuteCursOnDateDto>();
+        _currentRate = new ConcurrentDictionary<string, ValuteCursOnDateDto?>();
     }
 
     public async Task UpdateRate()
@@ -40,12 +40,17 @@ public class ValuteRateProvider : BackgroundService, IValuteRateProvider //todo 
         _interval = interval;
     }
 
-    public ValuteCursOnDateDto GetCurrentRate(string vchCode)
+    public ValuteCursOnDateDto? GetCurrentRate(string vchCode)
     {
         return _currentRate[vchCode];
     }
 
-    public ConcurrentDictionary<string, ValuteCursOnDateDto> GetCurrentRate()
+    public bool TryGetCurrentRate(string vchCode, out ValuteCursOnDateDto? result)
+    {
+        return _currentRate.TryGetValue(vchCode.ToUpper(), out result);
+    }
+
+    public ConcurrentDictionary<string, ValuteCursOnDateDto?> GetCurrentRate()
     {
         return _currentRate;
     }

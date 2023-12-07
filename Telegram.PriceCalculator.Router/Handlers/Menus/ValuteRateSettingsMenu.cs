@@ -13,7 +13,7 @@ public class ValuteRateSettingsMenu : IActionHandler
         var actions = new List<string>()
         {
             ActionNames.ValuteRateSettings.UpdateRates,
-            ActionNames.ValuteRateSettings.GetByVch,
+            ActionNames.ValuteRateSettings.GetByVchInfo,
             ActionNames.ValuteRateSettings.GetAllVch,
         }.Select(i=>new KeyValuePair<string, string>(i, i));
 

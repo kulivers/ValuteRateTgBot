@@ -48,6 +48,7 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<IActionHandler, FormulaSettingsSettingsMenu>();
                    services.AddScoped<IActionHandler, UpdateRatesHandler>();
                    services.AddScoped<IActionHandler, GetAllVchHandler>();
+                   services.AddScoped<IActionHandler, GetByVchInfoHandler>();
                    services.AddScoped<IActionHandler, GetByVchHandler>();
 
                    //repositories

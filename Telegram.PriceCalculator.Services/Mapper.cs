@@ -5,7 +5,7 @@ namespace Telegram.PriceCalculator.Services;
 
 internal class Mapper
 {
-    public ValuteCursOnDateDto Map(ValuteCursOnDate? libCurs)
+    public ValuteCursOnDateDto? Map(ValuteCursOnDate? libCurs)
     {
         return libCurs == null ? new ValuteCursOnDateDto() : new ValuteCursOnDateDto(libCurs.Vname, libCurs.Vnom, libCurs.Vcurs, libCurs.Vcode, libCurs.VchCode);
     }

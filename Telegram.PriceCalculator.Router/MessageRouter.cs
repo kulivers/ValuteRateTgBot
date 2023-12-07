@@ -49,6 +49,13 @@ public class MessageRouter
             return;
         }
 
+        var context = _userContext.Get((long)userId);
+        if (context == Routes.Valute.GetRateVch)
+        {
+            await _actionHandlers[ActionNames.ValuteRateSettings.GetByVch].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+            return;
+        }
+
         if (_actionHandlers.TryGetValue(messageText, out var actionHandler))
         {
             await actionHandler.Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);

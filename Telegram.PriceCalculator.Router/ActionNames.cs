@@ -7,7 +7,8 @@ public static class ActionNames
     public static class ValuteRateSettings
     {
         public const string UpdateRates = "update Valute";
-        public const string GetByVch = "get curse by vch";
+        public const string GetByVch = "get curse by vch handle";
+        public const string GetByVchInfo = "get curse by vch";
         public const string GetAllVch = "get all vch info";
     }
 

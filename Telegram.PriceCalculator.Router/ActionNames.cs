@@ -7,7 +7,6 @@ public static class ActionNames
     public static class ValuteRateSettings
     {
         public const string UpdateRates = "update Valute";
-        public const string GetByCountry = "get curse by country";
         public const string GetByVch = "get curse by vch";
         public const string GetAllVch = "get all vch info";
     }

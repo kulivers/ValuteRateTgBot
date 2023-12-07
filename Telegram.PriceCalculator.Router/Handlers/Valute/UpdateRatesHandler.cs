@@ -17,22 +17,22 @@ public class UpdateRatesHandler : ActionHandler
     }
 
     public override string ActionName => ActionNames.ValuteRateSettings.UpdateRates;
-    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update)
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
-        userContext.Set(update.Message.From.Id, Routes.Valute.ForceUpdate);
+        userContext.Set(userId, Routes.Valute.ForceUpdate);
         var result = false;
         try
         {
             await _valuteRateProvider.UpdateRate();
+            result = true;
         }
         catch
         {
 
         }
         await botClient.SendTextMessageAsync(
-            chatId: update.Message.Chat.Id,
-            text: result ? "Updated successfully" : "Failed to process request",
+            chatId: chatId,
+            text: result ? "Updated successfully" : "Failed to process request to central bank",
             cancellationToken: CancellationToken.None);
-
     }
 }

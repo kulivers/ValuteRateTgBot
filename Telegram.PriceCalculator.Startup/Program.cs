@@ -46,6 +46,7 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<ActionHandler, ValuteRateSettingsMenu>();
                    services.AddScoped<ActionHandler, FormulaSettingsSettingsMenu>();
                    services.AddScoped<ActionHandler, UpdateRatesHandler>();
+                   services.AddScoped<ActionHandler, GetAllVchHandler>();
 
                    //repositories
                    services.AddScoped<IRepositoryManager, RepositoryManager>();

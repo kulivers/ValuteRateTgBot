@@ -40,13 +40,22 @@ public class MessageRouter
                 cancellationToken: cancellationToken);
         }
 
-        if (messageText != null && _actionHandlers.TryGetValue(messageText, out var actionHandler))
+        if (messageText == null || chatId == null || userId == null)
         {
-            await actionHandler.Handle(botClient, _userContext, update);
+            // await botClient.SendTextMessageAsync(
+            //     chatId: chatId,
+            //     text: "Error", //error data handler
+            //     cancellationToken: cancellationToken);
             return;
         }
 
-        await _actionHandlers[ActionNames.Default].Handle(botClient, _userContext, update); //todo cancellationToken here
+        if (_actionHandlers.TryGetValue(messageText, out var actionHandler))
+        {
+            await actionHandler.Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+            return;
+        }
+
+        await _actionHandlers[ActionNames.Default].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
     }
 
     private UpdateData GetUpdateData(Update update)

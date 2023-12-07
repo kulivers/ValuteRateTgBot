@@ -5,10 +5,10 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu;
 
-public class DefaultActionHandler : ActionHandler
+public class DefaultActionHandler : IActionHandler
 {
-    public override string ActionName => ActionNames.Default;
-    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public string ActionName => ActionNames.Default;
+    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         if (string.IsNullOrWhiteSpace(message))
         {

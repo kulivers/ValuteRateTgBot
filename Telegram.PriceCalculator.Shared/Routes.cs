@@ -6,7 +6,7 @@ public static class Routes
     {
         public const string Root = "/valute";
         public const string ForceUpdate = "/valute/force_update_valute";
-        public const string GetAllRates = "/valute/get_all_rates";
+        public const string GetAllRates = "/valute/get_all_rates";//todo rename
         public const string GetRateVch = "/valute/get_rate_vch";
         public const string GetRateCountry = "/valute/get_rate_country";
     }

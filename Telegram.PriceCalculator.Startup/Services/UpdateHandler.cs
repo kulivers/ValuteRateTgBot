@@ -4,6 +4,27 @@ using Telegram.Bot.Types;
 using Telegram.PriceCalculator.Router;
 
 namespace Telegram.Bot.Examples.Polling.Services;
+public class UpdateHandler2 : IUpdateHandler
+{
+    private readonly ILogger<UpdateHandler> _logger;
+    private readonly MessageRouter _router;
+
+    public UpdateHandler2(ILogger<UpdateHandler> logger, MessageRouter router)
+    {
+        _logger = logger;
+        _router = router;
+    }
+    public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+    {
+        ;
+        await botClient.ReceiveAsync(new UpdateHandler(_logger, _router), cancellationToken: cancellationToken);
+    }
+
+    public async Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+    {
+        ;
+    }
+}
 
 public class UpdateHandler : IUpdateHandler
 {

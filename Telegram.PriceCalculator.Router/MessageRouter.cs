@@ -14,9 +14,9 @@ public class MessageRouter
     private readonly ITelegramBotClient _botClient;
     private UserContext _userContext;
     private RoutesStorageTree _routes;
-    private readonly Dictionary<string, ActionHandler> _actionHandlers;
+    private readonly Dictionary<string, IActionHandler> _actionHandlers;
 
-    public MessageRouter(ILogger<MessageRouter> logger, ITelegramBotClient botClient, UserContext userContext, RoutesStorageTree routes, IEnumerable<ActionHandler> actionHandlers)
+    public MessageRouter(ILogger<MessageRouter> logger, ITelegramBotClient botClient, UserContext userContext, RoutesStorageTree routes, IEnumerable<IActionHandler> actionHandlers)
     {
         _logger = logger;
         _botClient = botClient;

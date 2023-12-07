@@ -1,14 +1,20 @@
 using Telegram.Bot;
+using Telegram.Bot.Polling;
+using Telegram.Bot.Types;
+using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Valute;
 
-public class GetByVchHandler : ActionHandler
+public class GetByVchHandler : IActionHandler
 {
-    // ActionNames.ValuteRateSettings.GetByVch,
-
-    public override string ActionName { get; }
-    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public string ActionName => ActionNames.ValuteRateSettings.GetByVch;
+    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
-        throw new NotImplementedException();
+        userContext.Set(userId, Routes.Valute.GetRateVch);
+        await botClient.SendTextMessageAsync(
+            chatId: chatId,
+            text: "inpute some",
+            cancellationToken: token);
+        Здесь все, в дефолтном ждем входа
     }
 }

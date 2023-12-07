@@ -7,7 +7,7 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Valute;
 
-public class UpdateRatesHandler : ActionHandler
+public class UpdateRatesHandler : IActionHandler
 {
     private readonly IValuteRateProvider _valuteRateProvider;
 
@@ -16,8 +16,8 @@ public class UpdateRatesHandler : ActionHandler
         _valuteRateProvider = valuteRateProvider;
     }
 
-    public override string ActionName => ActionNames.ValuteRateSettings.UpdateRates;
-    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public string ActionName => ActionNames.ValuteRateSettings.UpdateRates;
+    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Valute.ForceUpdate);
         var result = false;

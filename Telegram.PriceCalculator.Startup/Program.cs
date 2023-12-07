@@ -34,6 +34,7 @@ var host = Host.CreateDefaultBuilder(args)
                            });
 
                    services.AddScoped<UpdateHandler>();
+                   services.AddScoped<UpdateHandler2>();
                    services.AddScoped<ReceiverService>();
 
                    //ROUTER
@@ -42,11 +43,12 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<RoutesStorageTree>();
 
                    //actionHandlers
-                   services.AddScoped<ActionHandler, DefaultActionHandler>();
-                   services.AddScoped<ActionHandler, ValuteRateSettingsMenu>();
-                   services.AddScoped<ActionHandler, FormulaSettingsSettingsMenu>();
-                   services.AddScoped<ActionHandler, UpdateRatesHandler>();
-                   services.AddScoped<ActionHandler, GetAllVchHandler>();
+                   services.AddScoped<IActionHandler, DefaultActionHandler>();
+                   services.AddScoped<IActionHandler, ValuteRateSettingsMenu>();
+                   services.AddScoped<IActionHandler, FormulaSettingsSettingsMenu>();
+                   services.AddScoped<IActionHandler, UpdateRatesHandler>();
+                   services.AddScoped<IActionHandler, GetAllVchHandler>();
+                   services.AddScoped<IActionHandler, GetByVchHandler>();
 
                    //repositories
                    services.AddScoped<IRepositoryManager, RepositoryManager>();

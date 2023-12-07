@@ -40,6 +40,10 @@ public class FormulaCalculationManager : IFormulaCalculationManager
     {
         return _repository.Formulas.Get(id);
     }
+    public UserFormula? GetByUserId(long id)
+    {
+        return _repository.Formulas.GetByUserId(id);
+    }
 
     public TestFormulaResult TestFormula(long id)
     {
@@ -89,6 +93,33 @@ public class FormulaCalculationManager : IFormulaCalculationManager
         }
 
         await Edit(formula);
+    }
+
+    public async Task Create(string message, long userId)
+    {
+        var rows = message.Split('n');
+        var formula = rows[0];
+        var variablesRows = rows.Skip(1).ToArray();
+        var variables = new List<Variable>();
+        foreach (var row in variablesRows)
+        {
+            var split = row.Split(' ');
+            variables.Add(new Variable(){Value = decimal.Parse(split[1]), Name = split[0]});
+        }
+
+        foreach (var vchCode in _valuteRateProvider.GetVchCodes())
+        {
+            var upper = vchCode.ToUpper();
+            if (!formula.Contains(upper) && !formula.Contains(vchCode))
+            {
+                continue;
+            }
+
+            variables.Add(new ValuteCalculatedVariable() { Name = upper, VchCode = upper, Value = _valuteRateProvider.GetCurrentRate(upper)!.Vcurs });
+        }
+
+        await _repository.Formulas.CreateAsync(new UserFormula(){Variables = variables, Formula = formula, UserId = userId});
+        await _repository.SaveAsync();
     }
 
     public decimal CalculateResult(UserFormula formula)

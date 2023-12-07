@@ -36,6 +36,11 @@ public class UserFormulaRepository : RepositoryBase<UserFormula>, IUserFormulaRe
         return base.FindByCondition(formula => formula.FormulaId == id).SingleOrDefault();
     }
 
+    public UserFormula? GetByUserId(long id)
+    {
+        return base.FindByCondition(formula => formula.UserId == id).SingleOrDefault();
+    }
+
     public UserFormula Create(UserFormula formula)
     {
         base.Create(formula);

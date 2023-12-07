@@ -64,4 +64,9 @@ public class ValuteRateProvider : BackgroundService, IValuteRateProvider //todo 
             await Task.Delay(_interval);
         }
     }
+
+    public IEnumerable<string> GetVchCodes()
+    {
+        return _currentRate.Keys;
+    }
 }

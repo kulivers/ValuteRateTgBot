@@ -9,4 +9,5 @@ public interface IUserFormulaRepository
     UserFormula Edit(UserFormula formula);
     UserFormula Delete(UserFormula formula);
     UserFormula? Get(long id);
+    UserFormula? GetByUserId(long id);
 }

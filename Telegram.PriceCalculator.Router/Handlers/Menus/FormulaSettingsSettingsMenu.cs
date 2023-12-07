@@ -13,7 +13,7 @@ public class FormulaSettingsSettingsMenu : IActionHandler
     {
         var actions = new List<string>()
         {
-            ActionNames.FormulaSettings.SetupNewFormula,
+            ActionNames.FormulaSettings.SetupNewFormulaInfo,
             ActionNames.FormulaSettings.GetFormula,
             ActionNames.FormulaSettings.ListFormulas,
             ActionNames.FormulaSettings.EditFormula,

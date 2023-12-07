@@ -9,12 +9,14 @@ public static class ActionNames
         public const string UpdateRates = "update Valute";
         public const string GetByVch = "get curse by vch handle";
         public const string GetByVchInfo = "get curse by vch";
-        public const string GetAllVch = "get all vch info";
+        public const string GetAllVch = "What is VCH code?";
     }
 
     public static class FormulaSettings
     {
-        public const string SetupNewFormula = "SetupNewFormula";
+        public const string SetupNewFormulaInfo = "SetupNewFormula";
+        public const string SetupNewFormulaInput = "SetupNewFormulaInput";
+        public const string DeleteFormula = "DeleteFormula";
         public const string GetFormula = "GetFormula";
         public const string ListFormulas = "ListFormulas";
         public const string EditFormula = "EditFormula";

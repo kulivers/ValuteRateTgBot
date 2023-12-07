@@ -9,6 +9,7 @@ using Telegram.PriceCalculator.Repository;
 using Telegram.PriceCalculator.Router;
 using Telegram.PriceCalculator.Router.Handlers.Menus;
 using Telegram.PriceCalculator.Router.Menu;
+using Telegram.PriceCalculator.Router.Menu.Formula;
 using Telegram.PriceCalculator.Router.Menu.Valute;
 using Telegram.PriceCalculator.Services;
 using Telegram.PriceCalculator.Shared;
@@ -41,6 +42,7 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<MessageRouter>();
                    services.AddScoped<UserContext>();
                    services.AddScoped<RoutesStorageTree>();
+                   services.AddScoped<IFormulaCalculationManager, FormulaCalculationManager>();
 
                    //actionHandlers
                    services.AddScoped<IActionHandler, DefaultActionHandler>();
@@ -50,6 +52,11 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddScoped<IActionHandler, GetAllVchHandler>();
                    services.AddScoped<IActionHandler, GetByVchInfoHandler>();
                    services.AddScoped<IActionHandler, GetByVchHandler>();
+                   services.AddScoped<IActionHandler, DeleteFormulaHandler>();
+                   services.AddScoped<IActionHandler, SetupNewFormulaHandler>();
+                   services.AddScoped<IActionHandler, SetupNewFormulaInputHandler>();
+                   // services.AddScoped<IActionHandler, ListFormulasHandler>();
+                   // services.AddScoped<IActionHandler, EditFormulaHandler>();
 
                    //repositories
                    services.AddScoped<IRepositoryManager, RepositoryManager>();

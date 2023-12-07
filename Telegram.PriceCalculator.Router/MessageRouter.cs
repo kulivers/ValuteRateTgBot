@@ -50,10 +50,14 @@ public class MessageRouter
         }
 
         var context = _userContext.Get((long)userId);
-        if (context == Routes.Valute.GetRateVch)
+        switch (context)
         {
-            await _actionHandlers[ActionNames.ValuteRateSettings.GetByVch].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
-            return;
+            case Routes.Valute.GetRateVch:
+                await _actionHandlers[ActionNames.ValuteRateSettings.GetByVch].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+                return;
+            case Routes.Formula.Formulacreate:
+                await _actionHandlers[ActionNames.FormulaSettings.SetupNewFormulaInput].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+                return;
         }
 
         if (_actionHandlers.TryGetValue(messageText, out var actionHandler))

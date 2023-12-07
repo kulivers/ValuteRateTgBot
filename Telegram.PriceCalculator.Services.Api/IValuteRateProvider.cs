@@ -10,4 +10,5 @@ public interface IValuteRateProvider
     ValuteCursOnDateDto? GetCurrentRate(string vchCode);
     bool TryGetCurrentRate(string vchCode, out ValuteCursOnDateDto? result);
     ConcurrentDictionary<string, ValuteCursOnDateDto?> GetCurrentRate();
+    public IEnumerable<string> GetVchCodes();
 }

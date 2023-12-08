@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.PriceCalculator.Router.Handlers.Menus;
@@ -67,6 +68,14 @@ public class MessageRouter
         }
 
         await _actionHandlers[ActionNames.Default].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+    }
+
+    private static async Task<Message> SendDone(ITelegramBotClient botClient, CancellationToken cancellationToken, [DisallowNull] long? chatId)
+    {
+        return await botClient.SendTextMessageAsync(
+            chatId: chatId,
+            text: "Done.",
+            cancellationToken: cancellationToken);
     }
 
     private UpdateData GetUpdateData(Update update)

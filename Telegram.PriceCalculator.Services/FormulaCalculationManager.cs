@@ -57,23 +57,22 @@ public class FormulaCalculationManager : IFormulaCalculationManager
         return formulaId;
     }
 
-    public TestFormulaResult TestFormula(long id)
+    public bool TestFormula(UserFormula formula)
     {
-        var formula = Get(id);
         if (formula == default)
         {
-            return new TestFormulaResult(false, $"No formula by this id {id}");
+            return false;
         }
 
-        try
+        for (var i = -5; i < 5; i++)
         {
-            _calculator.Calculate(formula);
-            return new TestFormulaResult(true, "");
+            if (TryCalculateResult(formula, i, out _))
+            {
+                return true;
+            }
         }
-        catch (Exception e)
-        {
-            return new TestFormulaResult(false, e.Message);
-        }
+
+        return false;
     }
 
     public async Task AddVariables(long formulaId, IEnumerable<Variable> variables)
@@ -107,7 +106,7 @@ public class FormulaCalculationManager : IFormulaCalculationManager
         await Edit(formula);
     }
 
-    public async Task Create(string message, long userId)
+    public async Task<bool> Create(string message, long userId)
     {
         var rows = message.Split('\n');
         var formula = rows[0];
@@ -130,14 +129,16 @@ public class FormulaCalculationManager : IFormulaCalculationManager
             variables.Add(new ValuteCalculatedVariable() { Name = upper, VchCode = upper, Value = _valuteRateProvider.GetCurrentRate(upper)!.Vcurs });
         }
 
-        await _repository.Formulas.CreateAsync(new UserFormula(){Variables = variables, Formula = formula, UserId = userId});
-        await _repository.SaveAsync();
-    }
+        var userFormula = new UserFormula(){Variables = variables, Formula = formula, UserId = userId};
+        var successTest = TestFormula(userFormula);
+        if (!successTest)
+        {
+            return false;
+        }
 
-    public decimal CalculateResult(UserFormula formula)
-    {
-        formula.Variables = RefreshValuteVariables(formula.Variables);
-        return _calculator.Calculate(formula);
+        await _repository.Formulas.CreateAsync(userFormula);
+        await _repository.SaveAsync();
+        return true;
     }
 
     public bool TryCalculateResult(UserFormula formula, decimal userValue, out decimal result)
@@ -145,8 +146,12 @@ public class FormulaCalculationManager : IFormulaCalculationManager
         try
         {
             formula.Variables ??= new List<Variable>();
-            formula.Variables.Add(new Variable() { Name = "USER", Value = userValue });
-            result = CalculateResult(formula);
+            if (!formula.Variables.Exists(v=>v.Name == "USER"))
+            {
+                formula.Variables.Add(new Variable() { Name = "USER", Value = userValue });
+            }
+            formula.Variables = RefreshValuteVariables(formula.Variables);
+            result = _calculator.Calculate(formula);
             return true;
         }
         catch

@@ -3,23 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Telegram.PriceCalculator.Shared;
 
-public class TestFormulaResult
-{
-    public TestFormulaResult()
-    {
-
-    }
-
-    public TestFormulaResult(bool success, string exceptionMessage)
-    {
-        Success = success;
-        ExceptionMessage = exceptionMessage;
-    }
-
-    public bool Success { get; set; }
-    public string ExceptionMessage { get; set; }
-}
-
 public class UserFormula
 {
     public UserFormula()

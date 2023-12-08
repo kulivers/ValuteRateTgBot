@@ -17,9 +17,17 @@ public class DeleteFormulaHandler : IActionHandler
         var formula = _manager.GetByUserId(userId);
         if (formula == default)
         {
-            return;
+            await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "You havent got formula",
+                cancellationToken: token);
         }
 
         await _manager.Delete(formula);
+        await botClient.SendTextMessageAsync(
+            chatId: chatId,
+            text: "Done.",
+            cancellationToken: token);
+
     }
 }

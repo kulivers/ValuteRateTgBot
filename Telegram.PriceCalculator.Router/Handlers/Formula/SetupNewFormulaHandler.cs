@@ -43,6 +43,10 @@ public class SetupNewFormulaInputHandler : IActionHandler
     public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Default);
-        await _calculationManager.Create(message, userId);
+        var result = await _calculationManager.Create(message, userId);
+        await botClient.SendTextMessageAsync(
+            chatId: chatId,
+            text: result ? "Done." : "Formula has errors. It hasnt created",
+            cancellationToken: token);
     }
 }

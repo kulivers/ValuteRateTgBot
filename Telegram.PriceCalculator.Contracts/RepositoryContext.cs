@@ -32,12 +32,23 @@ public class RepositoryContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<UserFormula>()
+               .HasKey(x => x.FormulaId); // The primary key
+
+        builder.Entity<UserFormula>()
+               .Property(x => x.FormulaId)
+               .ValueGeneratedOnAdd(); // Auto-increment
+
+        builder.Entity<UserFormula>()
+               .HasMany(x => x.Variables) // One-to-many relationship
+               .WithOne() // No inverse navigation
+               .HasForeignKey("FormulaId") // Foreign key on Variables
+               .IsRequired(); // on delete cascade by default
+
         builder.Entity<UserFormula>(entity =>
         {
-            entity.HasKey(e => e.FormulaId);
             entity.Property(e => e.Formula).IsRequired();
             entity.Property(e => e.UserId).IsRequired();
-            entity.HasMany(e => e.Variables);
         });
 
         builder.Entity<Variable>(entity =>
@@ -45,6 +56,7 @@ public class RepositoryContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
             entity.Property(e => e.Value).IsRequired();
+
 
         });
 

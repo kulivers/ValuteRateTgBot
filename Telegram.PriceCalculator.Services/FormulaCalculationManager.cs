@@ -140,10 +140,12 @@ public class FormulaCalculationManager : IFormulaCalculationManager
         return _calculator.Calculate(formula);
     }
 
-    public bool TryCalculateResult(UserFormula formula, out decimal result)
+    public bool TryCalculateResult(UserFormula formula, decimal userValue, out decimal result)
     {
         try
         {
+            formula.Variables ??= new List<Variable>();
+            formula.Variables.Add(new Variable() { Name = "USER", Value = userValue });
             result = CalculateResult(formula);
             return true;
         }

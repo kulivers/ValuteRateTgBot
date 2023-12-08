@@ -26,7 +26,7 @@ public class DefaultActionHandler : IActionHandler
             return;
         }
 
-        if (decimal.TryParse(message, out var result))
+        if (decimal.TryParse(message, out var userValue))
         {
             var formula = _calcManager.GetByUserId(userId);
             if (formula == null)
@@ -38,37 +38,35 @@ public class DefaultActionHandler : IActionHandler
                 return;
             }
 
-            if (formula.Variables == null)
-            {
-                formula.Variables = new List<Variable>();
-                formula.Variables.Add(new Variable() { Name = "USER", Value = result });
-            }
 
-            if (_calcManager.TryCalculateResult(formula, out result))
-            {
-                await botClient.SendTextMessageAsync(
-                    chatId: chatId,
-                    text: result.ToString(),
-                    cancellationToken: token);
-            }
-            else
-            {
-                await botClient.SendTextMessageAsync(
-                    chatId: chatId,
-                    text: "cant calculate result",
-                    cancellationToken: token);
-            }
-
-            //calculate for user formula //todo here is actions by context
+            await HandleFormulaCalculation(botClient, chatId, token, formula, userValue);
             return;
         }
 
         await ShowMenu(botClient, chatId, CancellationToken.None);
     }
 
-    private async Task<Message> ShowMenu(ITelegramBotClient botClient, long chatId, CancellationToken cancellationToken)
+    private async Task HandleFormulaCalculation(ITelegramBotClient botClient, long chatId, CancellationToken token, UserFormula formula, decimal userValue)
     {
-        return await botClient.SendTextMessageAsync(
+        if (_calcManager.TryCalculateResult(formula, userValue, out var result))
+        {
+            await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: result.ToString(),
+                cancellationToken: token);
+        }
+        else
+        {
+            await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "cant calculate result",
+                cancellationToken: token);
+        }
+    }
+
+    private async Task ShowMenu(ITelegramBotClient botClient, long chatId, CancellationToken cancellationToken)
+    {
+        await botClient.SendTextMessageAsync(
             chatId: chatId,
             text: "No handler for this action.",
             replyMarkup: TgViewsFactory.GetKeyboard(ActionNames.Menu.ValuteRateSettings, ActionNames.Menu.FormulaSettings),

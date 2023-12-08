@@ -7,8 +7,7 @@ namespace Telegram.Bot.Examples.Polling.Abstract;
 /// An abstract class to compose Receiver Service and Update Handler classes
 /// </summary>
 /// <typeparam name="TUpdateHandler">Update Handler to use in Update Receiver</typeparam>
-public abstract class ReceiverServiceBase<TUpdateHandler> : IReceiverService
-    where TUpdateHandler : IUpdateHandler
+public abstract class ReceiverServiceBase<TUpdateHandler> : IReceiverService where TUpdateHandler : IUpdateHandler
 {
     private readonly ITelegramBotClient _botClient;
     private readonly IUpdateHandler _updateHandler;

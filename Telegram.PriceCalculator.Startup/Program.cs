@@ -47,6 +47,7 @@ var host = Host.CreateDefaultBuilder(args)
                    //actionHandlers
                    services.AddScoped<ActionHandler, DefaultActionHandler>();
                    services.AddScoped<ActionHandler, ImageConverterHandler>();
+                   services.AddScoped<ActionHandler, ExcelConverterHandler>();
                    services.AddScoped<ActionHandler, ValuteRateSettingsMenu>();
                    services.AddScoped<ActionHandler, FormulaSettingsSettingsMenu>();
                    services.AddScoped<ActionHandler, UpdateRatesHandler>();

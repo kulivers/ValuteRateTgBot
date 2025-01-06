@@ -6,10 +6,10 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Valute;
 
-public class GetByVchInfoHandler : IActionHandler
+public class GetByVchInfoHandler : ActionHandler
 {
-    public string ActionName => ActionNames.ValuteRateSettings.GetByVchInfo;
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override string ActionName => ActionNames.ValuteRateSettings.GetByVchInfo;
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Valute.GetRateVch);
         await botClient.SendTextMessageAsync(
@@ -17,9 +17,14 @@ public class GetByVchInfoHandler : IActionHandler
             text: "input vch code to get valute rate",
             cancellationToken: token);
     }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
+    }
 }
 
-public class GetByVchHandler : IActionHandler
+public class GetByVchHandler : ActionHandler
 {
     private readonly IValuteRateProvider _valuteRateProvider;
 
@@ -27,8 +32,8 @@ public class GetByVchHandler : IActionHandler
     {
         _valuteRateProvider = valuteRateProvider;
     }
-    public string ActionName => ActionNames.ValuteRateSettings.GetByVch;
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override string ActionName => ActionNames.ValuteRateSettings.GetByVch;
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Default);
         if (_valuteRateProvider.TryGetCurrentRate(message, out var result))
@@ -45,5 +50,10 @@ public class GetByVchHandler : IActionHandler
                 text: "invalid vch code",
                 cancellationToken: token);
         }
+    }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
     }
 }

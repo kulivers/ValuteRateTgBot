@@ -4,8 +4,15 @@ using Telegram.Bot.Types;
 
 namespace Telegram.PriceCalculator.Router.Menu;
 
-public interface IActionHandler//todo this is interface
+public abstract class ActionHandler
 {
-    public string ActionName { get; }
-    public Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token);
+    public abstract string ActionName { get; }
+    public abstract Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token);
+    public abstract Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token);
+
+    public virtual bool ShouldHandle(Telegram.Bot.Types.Update update)
+    {
+        return false;
+    }
+
 }

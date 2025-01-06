@@ -1,15 +1,16 @@
 using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.PriceCalculator.Services;
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Formula;
 
 
-public class SetupNewFormulaHandler : IActionHandler
+public class SetupNewFormulaHandler : ActionHandler
 {
-    public string ActionName => ActionNames.FormulaSettings.SetupNewFormulaInfo;
+    public override string ActionName => ActionNames.FormulaSettings.SetupNewFormulaInfo;
 
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Formula.Formulacreate);
         await botClient.SendTextMessageAsync(
@@ -28,9 +29,14 @@ public class SetupNewFormulaHandler : IActionHandler
                   "y 5",
             cancellationToken: token);
     }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
+    }
 }
 
-public class SetupNewFormulaInputHandler : IActionHandler
+public class SetupNewFormulaInputHandler : ActionHandler
 {
     private IFormulaCalculationManager _calculationManager;
 
@@ -38,9 +44,9 @@ public class SetupNewFormulaInputHandler : IActionHandler
     {
         _calculationManager = formulaCalculationManager;
     }
-    public string ActionName => ActionNames.FormulaSettings.SetupNewFormulaInput;
+    public override string ActionName => ActionNames.FormulaSettings.SetupNewFormulaInput;
 
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Default);
         var result = await _calculationManager.Create(message, userId);
@@ -48,5 +54,10 @@ public class SetupNewFormulaInputHandler : IActionHandler
             chatId: chatId,
             text: result ? "Done." : "Formula has errors. It hasnt created",
             cancellationToken: token);
+    }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
     }
 }

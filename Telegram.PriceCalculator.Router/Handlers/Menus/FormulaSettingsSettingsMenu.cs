@@ -6,10 +6,10 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Handlers.Menus;
 
-public class FormulaSettingsSettingsMenu : IActionHandler
+public class FormulaSettingsSettingsMenu : ActionHandler
 {
-    public string ActionName => ActionNames.Menu.FormulaSettings;
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override string ActionName => ActionNames.Menu.FormulaSettings;
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         var actions = new List<string>()
         {
@@ -23,5 +23,10 @@ public class FormulaSettingsSettingsMenu : IActionHandler
             text: "Choose action",
             replyMarkup: TgViewsFactory.GetInlineKeyboard(actions, (byte)actions.Count(), 1),
             cancellationToken: CancellationToken.None);
+    }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
     }
 }

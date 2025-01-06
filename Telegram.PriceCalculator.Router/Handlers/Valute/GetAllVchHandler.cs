@@ -1,12 +1,13 @@
 using System.Collections.Concurrent;
 using System.Text;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.PriceCalculator.Calculator.Api;
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Valute;
 
-public class GetAllVchHandler : IActionHandler
+public class GetAllVchHandler : ActionHandler
 {
     private readonly IValuteRateProvider _rateProvider;
     private const int MaxTgMessageLength = 4096;
@@ -16,8 +17,8 @@ public class GetAllVchHandler : IActionHandler
         _rateProvider = rateProvider;
     }
     // ActionNames.ValuteRateSettings.GetAllVch,
-    public string ActionName => ActionNames.ValuteRateSettings.GetAllVch;
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override string ActionName => ActionNames.ValuteRateSettings.GetAllVch;
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Valute.GetAllRates);
         var rates = _rateProvider.GetCurrentRate();
@@ -42,5 +43,10 @@ public class GetAllVchHandler : IActionHandler
             chatId: chatId,
             text: builder.ToString(),
             cancellationToken: token);
+    }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
     }
 }

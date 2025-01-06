@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Repository;
@@ -21,12 +22,12 @@ public class RepositoryContext : DbContext
 
     public RepositoryContext()
     {
-        Database.EnsureCreated();
+        // Database.EnsureCreated();
     }
 
     public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)
     {
-        Database.EnsureCreated();
+        // Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

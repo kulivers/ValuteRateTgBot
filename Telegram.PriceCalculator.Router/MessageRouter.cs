@@ -15,9 +15,9 @@ public class MessageRouter
     private readonly ITelegramBotClient _botClient;
     private UserContext _userContext;
     private RoutesStorageTree _routes;
-    private readonly Dictionary<string, IActionHandler> _actionHandlers;
+    private readonly Dictionary<string, ActionHandler> _actionHandlers;
 
-    public MessageRouter(ILogger<MessageRouter> logger, ITelegramBotClient botClient, UserContext userContext, RoutesStorageTree routes, IEnumerable<IActionHandler> actionHandlers)
+    public MessageRouter(ILogger<MessageRouter> logger, ITelegramBotClient botClient, UserContext userContext, RoutesStorageTree routes, IEnumerable<ActionHandler> actionHandlers)
     {
         _logger = logger;
         _botClient = botClient;
@@ -26,7 +26,7 @@ public class MessageRouter
         _actionHandlers = actionHandlers.ToDictionary(handler => handler.ActionName, handler => handler); //todo perfomance
     }
 
-    public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+    public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken token)
     {
         var userData = GetUpdateData(update);
         var userId = userData.UserId;
@@ -38,10 +38,10 @@ public class MessageRouter
             await botClient.SendTextMessageAsync(
                 chatId: update.Message.Chat.Id,
                 text: "Error. Unable get user id.",
-                cancellationToken: cancellationToken);
+                cancellationToken: token);
         }
 
-        if (messageText == null || chatId == null || userId == null)
+        if (chatId == null || userId == null)
         {
             // await botClient.SendTextMessageAsync(
             //     chatId: chatId,
@@ -54,20 +54,29 @@ public class MessageRouter
         switch (context)
         {
             case Routes.Valute.GetRateVch:
-                await _actionHandlers[ActionNames.ValuteRateSettings.GetByVch].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+                await _actionHandlers[ActionNames.ValuteRateSettings.GetByVch].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, token);
                 return;
             case Routes.Formula.Formulacreate:
-                await _actionHandlers[ActionNames.FormulaSettings.SetupNewFormulaInput].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+                await _actionHandlers[ActionNames.FormulaSettings.SetupNewFormulaInput].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, token);
                 return;
         }
 
-        if (_actionHandlers.TryGetValue(messageText, out var actionHandler))
+        if (messageText != null && _actionHandlers.TryGetValue(messageText, out var actionHandler)) //todo egor remade to shouldHandle
         {
-            await actionHandler.Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+            await actionHandler.Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, token);
             return;
         }
 
-        await _actionHandlers[ActionNames.Default].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, cancellationToken);
+        var handlers = _actionHandlers.Where(handler => handler.Value.ShouldHandle(update)).ToList();
+        foreach (var (_, handler) in handlers)
+        {
+            await handler.Handle(botClient, _userContext, update, token);
+        }
+
+        if (handlers.Count == 0)
+        {
+            await _actionHandlers[ActionNames.Default].Handle(botClient, _userContext, messageText, (long)userId, (long)chatId, token);
+        }
     }
 
     private static async Task<Message> SendDone(ITelegramBotClient botClient, CancellationToken cancellationToken, [DisallowNull] long? chatId)

@@ -1,14 +1,15 @@
 using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.PriceCalculator.Presentation;
 using Telegram.PriceCalculator.Router.Menu;
 using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Handlers.Menus;
 
-public class ValuteRateSettingsMenu : IActionHandler
+public class ValuteRateSettingsMenu : ActionHandler
 {
-    public string ActionName => ActionNames.Menu.ValuteRateSettings;
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override string ActionName => ActionNames.Menu.ValuteRateSettings;
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         var actions = new List<string>()
         {
@@ -24,5 +25,10 @@ public class ValuteRateSettingsMenu : IActionHandler
             replyMarkup: TgViewsFactory.GetInlineKeyboard(actions, (byte)actions.Count(), 1),
             cancellationToken: token);
 
+    }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
     }
 }

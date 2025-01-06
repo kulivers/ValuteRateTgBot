@@ -7,7 +7,7 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu.Valute;
 
-public class UpdateRatesHandler : IActionHandler
+public class UpdateRatesHandler : ActionHandler
 {
     private readonly IValuteRateProvider _valuteRateProvider;
 
@@ -16,8 +16,8 @@ public class UpdateRatesHandler : IActionHandler
         _valuteRateProvider = valuteRateProvider;
     }
 
-    public string ActionName => ActionNames.ValuteRateSettings.UpdateRates;
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override string ActionName => ActionNames.ValuteRateSettings.UpdateRates;
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         userContext.Set(userId, Routes.Valute.ForceUpdate);
         var result = false;
@@ -34,5 +34,10 @@ public class UpdateRatesHandler : IActionHandler
             chatId: chatId,
             text: result ? "Updated successfully" : "Failed to process request to central bank",
             cancellationToken: CancellationToken.None);
+    }
+
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
     }
 }

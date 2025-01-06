@@ -7,7 +7,7 @@ using Telegram.PriceCalculator.Shared;
 
 namespace Telegram.PriceCalculator.Router.Menu;
 
-public class DefaultActionHandler : IActionHandler
+public class DefaultActionHandler : ActionHandler
 {
     private IFormulaCalculationManager _calcManager;
 
@@ -16,9 +16,9 @@ public class DefaultActionHandler : IActionHandler
         _calcManager = calculationManager;
     }
 
-    public string ActionName => ActionNames.Default;
+    public override string ActionName => ActionNames.Default;
 
-    public async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
+    public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, string message, long userId, long chatId, CancellationToken token)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
@@ -46,6 +46,11 @@ public class DefaultActionHandler : IActionHandler
         await ShowMenu(botClient, chatId, CancellationToken.None);
     }
 
+    public override Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
+    {
+        throw new NotImplementedException();
+    }
+
     private async Task HandleFormulaCalculation(ITelegramBotClient botClient, long chatId, CancellationToken token, UserFormula formula, decimal userValue)
     {
         if (_calcManager.TryCalculateResult(formula, userValue, out var result))
@@ -68,8 +73,8 @@ public class DefaultActionHandler : IActionHandler
     {
         await botClient.SendTextMessageAsync(
             chatId: chatId,
-            text: "No handler for this action.",
-            replyMarkup: TgViewsFactory.GetKeyboard(ActionNames.Menu.ValuteRateSettings, ActionNames.Menu.FormulaSettings),
+            text: "Сейчас поддерживаются только действия: \n 1. Конвертировать фото в эксель\n 2. Переложить из Excel в Excel.",
+            // replyMarkup: TgViewsFactory.GetKeyboard(ActionNames.Menu.ValuteRateSettings, ActionNames.Menu.FormulaSettings),
             cancellationToken: cancellationToken);
     }
 }

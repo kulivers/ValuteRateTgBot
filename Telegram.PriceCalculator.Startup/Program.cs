@@ -47,16 +47,17 @@ var host = Host.CreateDefaultBuilder(args)
                    //actionHandlers
                    services.AddScoped<ActionHandler, DefaultActionHandler>();
                    services.AddScoped<ActionHandler, ImageConverterHandler>();
-                   services.AddScoped<ActionHandler, ExcelConverterHandler>();
-                   services.AddScoped<ActionHandler, ValuteRateSettingsMenu>();
-                   services.AddScoped<ActionHandler, FormulaSettingsSettingsMenu>();
-                   services.AddScoped<ActionHandler, UpdateRatesHandler>();
-                   services.AddScoped<ActionHandler, GetAllVchHandler>();
-                   services.AddScoped<ActionHandler, GetByVchInfoHandler>();
-                   services.AddScoped<ActionHandler, GetByVchHandler>();
-                   services.AddScoped<ActionHandler, DeleteFormulaHandler>();
-                   services.AddScoped<ActionHandler, SetupNewFormulaHandler>();
-                   services.AddScoped<ActionHandler, SetupNewFormulaInputHandler>();
+                   services.AddScoped<ActionHandler, FileDocConverterHandler>();
+                   // services.AddScoped<ActionHandler, ExcelConverterHandler>();
+                   // services.AddScoped<ActionHandler, ValuteRateSettingsMenu>();
+                   // services.AddScoped<ActionHandler, FormulaSettingsSettingsMenu>();
+                   // services.AddScoped<ActionHandler, UpdateRatesHandler>();
+                   // services.AddScoped<ActionHandler, GetAllVchHandler>();
+                   // services.AddScoped<ActionHandler, GetByVchInfoHandler>();
+                   // services.AddScoped<ActionHandler, GetByVchHandler>();
+                   // services.AddScoped<ActionHandler, DeleteFormulaHandler>();
+                   // services.AddScoped<ActionHandler, SetupNewFormulaHandler>();
+                   // services.AddScoped<ActionHandler, SetupNewFormulaInputHandler>();
 
                    //repositories
                    services.AddScoped<IRepositoryManager, RepositoryManager>();

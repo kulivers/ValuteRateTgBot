@@ -5,11 +5,11 @@ using File = Telegram.Bot.Types.File;
 
 namespace Telegram.PriceCalculator.Router.Menu;
 
-public class ImageConverterHandler : ActionHandler
+public class FileDocConverterHandler : ActionHandler
 {
     public static string TempFolder = Path.Combine(Path.GetTempPath(), "tgBot");
 
-    public ImageConverterHandler()
+    public FileDocConverterHandler()
     {
         if (!Directory.Exists(TempFolder))
         {
@@ -26,8 +26,7 @@ public class ImageConverterHandler : ActionHandler
 
     public override bool ShouldHandle(Update update)
     {
-        var photo = update?.Message?.Photo;
-        return photo != null && photo.Length != 0;
+        return update?.Message?.Document?.MimeType?.Contains("jpeg")==true;
     }
 
     public override async Task Handle(ITelegramBotClient botClient, UserContext userContext, Update update, CancellationToken token)
@@ -43,7 +42,7 @@ public class ImageConverterHandler : ActionHandler
 
     private async Task<string> SaveFile(ITelegramBotClient botClient, Update update, CancellationToken token)//todo egor mb it could be in default tg folder
     {
-        var fileId = update.Message.Photo[^1].FileId;
+        var fileId = update.Message.Document.FileId;
         var file = await botClient.GetFileAsync(fileId, cancellationToken: token);
         var filePath = await PreparePath(file);
         await using var fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write);
